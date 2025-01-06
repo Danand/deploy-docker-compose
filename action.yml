@@ -35,6 +35,7 @@ runs:
       shell: bash
       run: |
         ${{ github.action_path }}/deploy.sh \
+          "${{ github.action_path }}" \
           "${{ github.sha }}" \
           "${{ inputs.ssh-user }}" \
           "${{ inputs.ssh-host }}" \

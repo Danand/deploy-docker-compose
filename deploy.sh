@@ -4,12 +4,13 @@
 
 set -e
 
-github_sha="$1"
-ssh_user="$2"
-ssh_host="$3"
-github_server_url="$4"
-github_repository="$5"
-docker_compose_profile="$6"
+action_path="$1"
+github_sha="$2"
+ssh_user="$3"
+ssh_host="$4"
+github_server_url="$5"
+github_repository="$6"
+docker_compose_profile="$7"
 
 github_repo_url="${github_server_url}/${github_repository}"
 github_repo_name="$(basename "${github_repository}")"
@@ -26,10 +27,10 @@ fi
 
 envsubst \
   '$GITHUB_REPO_URL $GITHUB_REPO_NAME $DOCKER_COMPOSE_PROFILE $GITHUB_SHA' \
-  < ssh-command-template.sh \
-  > ssh-command.sh
+  < "${action_path}/ssh-command-template.sh" \
+  > "${action_path}/ssh-command.sh"
 
-scp ssh-command.sh "${ssh_user}@${ssh_host}:~"
+scp "${action_path}/ssh-command.sh" "${ssh_user}@${ssh_host}:~/ssh-command.sh"
 
 ssh "${ssh_user}@${ssh_host}" 'chmod +x ~/ssh-command.sh && ~/ssh-command.sh'
 
