@@ -23,3 +23,7 @@ Add to your steps at certain job:
       MY_VAR_0=my_value_0
       MY_VAR_1=my_value_1
 ```
+
+## Notes
+
+If you want to use `ssh-clone: 'true'`, then add the public key corresponding to `${{ secrets.SSH_PRIVATE_KEY }}` to [your GitHub account settings](https://github.com/settings/keys).
