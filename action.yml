@@ -35,6 +35,16 @@ inputs:
     required: false
     default: 'false'
 
+  ssh-keep-alive:
+    description: 'TCPKeepAlive of SSH Connection'
+    required: false
+    default: 'yes'
+
+  ssh-alive-interval:
+    description: 'ServerAliveInterval of SSH Connection'
+    required: false
+    default: '300'
+
 runs:
   using: 'composite'
   steps:
@@ -50,6 +60,8 @@ runs:
         chmod 600 ~/.ssh/id_rsa
         echo "Host *" > ~/.ssh/config
         echo "    StrictHostKeyChecking no" >> ~/.ssh/config
+        echo "    TCPKeepAlive ${{ inputs.ssh-keep-alive }}" >> ~/.ssh/config
+        echo "    ServerAliveInterval ${{ inputs.ssh-alive-interval }}" >> ~/.ssh/config
 
     - name: Deploy Docker Compose
       shell: bash
