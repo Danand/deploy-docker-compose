@@ -8,7 +8,7 @@ apt update
 
 apt install -y curl git
 
-if [ $(docker --version > /dev/null 2>&1; echo $?) -ne 0 ];
+if [ $(docker --version > /dev/null 2>&1; echo $?) -ne 0 ]; then
   docker_install_script_path="./get-docker.sh"
 
   curl \
