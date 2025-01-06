@@ -20,6 +20,8 @@ rm -f "${docker_install_script_path}"
 
 apt install -y docker-compose
 
+export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+
 if [ -d "$GITHUB_REPO_NAME" ]; then
   cd "$GITHUB_REPO_NAME"
   docker-compose down
