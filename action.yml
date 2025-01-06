@@ -64,4 +64,5 @@ runs:
           "${{ inputs.docker-compose-profile }}" \
           "${{ inputs.docker-compose-env-file-path }}" \
           "${{ inputs.docker-compose-env-file-content }}" \
-          "${{ inputs.ssh-clone }}"
+          "${{ inputs.ssh-clone }}" \
+          "${{ inputs.ssh-private-key }}"

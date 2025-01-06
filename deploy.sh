@@ -14,6 +14,7 @@ docker_compose_profile="$7"
 env_file_path="$8"
 env_file_content="$9"
 ssh_clone="${10}"
+ssh_private_key="${11}"
 
 github_repo_url="${github_server_url}/${github_repository}"
 
@@ -36,6 +37,8 @@ fi
 export ENV_FILE_PATH="${env_file_path}"
 export ENV_FILE_CONTENT="${env_file_content}"
 
+export SSH_PRIVATE_KEY="${ssh_private_key}"
+
 ssh_command_local_path="${action_path}/ssh-command.sh"
 
 envsubst \
@@ -46,6 +49,7 @@ envsubst \
     $GITHUB_SHA \
     $ENV_FILE_PATH \
     $ENV_FILE_CONTENT \
+    $SSH_PRIVATE_KEY \
   ' \
 < "${action_path}/ssh-command-template.sh" \
 > "${ssh_command_local_path}"

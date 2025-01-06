@@ -24,7 +24,15 @@ if [ $(docker --version > /dev/null 2>&1; echo $?) -ne 0 ]; then
   apt install -y docker-compose
 fi
 
-export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+
+echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+chmod 600 ~/.ssh/id_rsa
+
+echo "Host *" > ~/.ssh/config
+echo "    StrictHostKeyChecking no" >> ~/.ssh/config
+echo "    UserKnownHostsFile /dev/null" >> ~/.ssh/config
 
 if [ -d "$GITHUB_REPO_NAME" ]; then
   cd "$GITHUB_REPO_NAME"
