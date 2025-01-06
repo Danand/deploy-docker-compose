@@ -30,7 +30,9 @@ runs:
       shell: bash
       run: |
         mkdir -p ~/.ssh
+        chmod 700
         echo "${{ inputs.ssh-private-key }}" > ~/.ssh/id_rsa
+        chmod 600
         echo "Host *" > ~/.ssh/config
         echo "    StrictHostKeyChecking no" >> ~/.ssh/config
 
