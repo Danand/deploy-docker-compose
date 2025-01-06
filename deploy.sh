@@ -58,7 +58,7 @@ ssh \
   "${ssh_user}@${ssh_host}" \
   " \
     chmod +x ${ssh_command_remote_path} && \
-    ${ssh_command_remote_path}; \
+    ${ssh_command_remote_path} && \
     rm -f ${ssh_command_remote_path}\
   "
 
