@@ -30,6 +30,8 @@ fi
 export ENV_FILE_PATH="${env_file_path}"
 export ENV_FILE_CONTENT="${env_file_content}"
 
+ssh_command_local_path="${action_path}/ssh-command.sh"
+
 envsubst \
   ' \
     $GITHUB_REPO_URL \
@@ -40,10 +42,18 @@ envsubst \
     $ENV_FILE_CONTENT \
   ' \
 < "${action_path}/ssh-command-template.sh" \
-> "${action_path}/ssh-command.sh"
+> "${ssh_command_local_path}"
 
-scp "${action_path}/ssh-command.sh" "${ssh_user}@${ssh_host}:~/ssh-command.sh"
+ssh_command_remote_path="~/ssh-command.sh"
 
-ssh "${ssh_user}@${ssh_host}" 'chmod +x ~/ssh-command.sh && ~/ssh-command.sh'
+scp "${ssh_command_local_path}" "${ssh_user}@${ssh_host}:${ssh_command_remote_path}"
+
+ssh \
+  "${ssh_user}@${ssh_host}" \
+  " \
+    chmod +x ${ssh_command_remote_path} && \
+    ${ssh_command_remote_path}; \
+    rm -f ${ssh_command_remote_path}\
+  "
 
 exit 0

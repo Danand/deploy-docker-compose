@@ -6,13 +6,17 @@ apt update
 
 apt install -y curl git
 
+docker_install_script_path="./get-docker.sh"
+
 curl \
   -fsSL "https://get.docker.com" \
-  -o "get-docker.sh"
+  -o "${docker_install_script_path}"
 
-chmod +x ./get-docker.sh
+chmod +x "${docker_install_script_path}"
 
-./get-docker.sh
+"${docker_install_script_path}"
+
+rm -f "${docker_install_script_path}"
 
 apt install -y docker-compose
 
