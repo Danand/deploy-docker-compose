@@ -29,6 +29,7 @@ runs:
     - name: Configure SSH
       shell: bash
       run: |
+        mkdir -p ~/.ssh
         echo "${{ inputs.ssh-private-key }}" > ~/.ssh/id_rsa
 
     - name: Deploy Docker Compose
