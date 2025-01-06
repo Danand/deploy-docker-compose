@@ -13,8 +13,14 @@ github_repository="$6"
 docker_compose_profile="$7"
 env_file_path="$8"
 env_file_content="$9"
+ssh_clone="${10}"
 
 github_repo_url="${github_server_url}/${github_repository}"
+
+if $ssh_clone; then
+  github_repo_url="git@github.com:${github_repository}.git"
+fi
+
 github_repo_name="$(basename "${github_repository}")"
 
 export GITHUB_SHA="${github_sha}"

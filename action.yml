@@ -30,6 +30,11 @@ inputs:
     required: false
     default: ''
 
+  ssh-clone:
+    description: 'Clone Repository via SSH'
+    required: false
+    default: 'false'
+
 runs:
   using: 'composite'
   steps:
@@ -58,4 +63,5 @@ runs:
           "${{ github.repository }}" \
           "${{ inputs.docker-compose-profile }}" \
           "${{ inputs.docker-compose-env-file-path }}" \
-          "${{ inputs.docker-compose-env-file-content }}"
+          "${{ inputs.docker-compose-env-file-content }}" \
+          "${{ inputs.ssh-clone }}"
