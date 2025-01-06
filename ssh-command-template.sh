@@ -6,19 +6,21 @@ apt update
 
 apt install -y curl git
 
-docker_install_script_path="./get-docker.sh"
+if [ $(docker --version > /dev/null 2>&1; echo $?) -ne 0 ];
+  docker_install_script_path="./get-docker.sh"
 
-curl \
-  -fsSL "https://get.docker.com" \
-  -o "${docker_install_script_path}"
+  curl \
+    -fsSL "https://get.docker.com" \
+    -o "${docker_install_script_path}"
 
-chmod +x "${docker_install_script_path}"
+  chmod +x "${docker_install_script_path}"
 
-"${docker_install_script_path}"
+  "${docker_install_script_path}"
 
-rm -f "${docker_install_script_path}"
+  rm -f "${docker_install_script_path}"
 
-apt install -y docker-compose
+  apt install -y docker-compose
+fi
 
 export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 
