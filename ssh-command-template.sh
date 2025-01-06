@@ -2,6 +2,8 @@
 #
 # Deploys Docker Compose configuration.
 
+set -e
+
 apt update
 
 apt install -y curl git
@@ -44,3 +46,5 @@ docker-compose \
   up \
   --build \
   --detach
+
+exit 0
