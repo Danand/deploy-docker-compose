@@ -1,5 +1,9 @@
 # GitHub Actions: Deploy Docker Compose
 
+## Prerequisites
+
+- Debian-based VM
+
 ## How to use
 
 Add to your steps at certain job:
