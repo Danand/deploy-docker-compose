@@ -27,7 +27,7 @@ fi
 
 git checkout --force $GITHUB_SHA
 
-if [ -f "$ENV_FILE_PATH" ]; then
+if [ -n "$ENV_FILE_PATH" ]; then
   echo "$ENV_FILE_CONTENT" > "$ENV_FILE_PATH"
 fi
 
