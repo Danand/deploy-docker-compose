@@ -13,4 +13,8 @@ Add to your steps at certain job:
     ssh-host: '${{ secrets.SSH_HOST }}'               # Required.
     ssh-user: '${{ secrets.SSH_USER }}'               # Optional. Default: 'root'
     docker-compose-profile: 'my-profile'              # Optional. Default: ''
+    docker-compose-env-file-path: '.env'              # Optional. Default: ''
+    docker-compose-env-file-content: |
+      MY_VAR_0=my_value_0
+      MY_VAR_1=my_value_1
 ```

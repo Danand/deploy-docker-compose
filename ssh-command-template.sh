@@ -16,16 +16,20 @@ chmod +x ./get-docker.sh
 
 apt install -y docker-compose
 
-if [ ! -d "$GITHUB_REPO_NAME" ]; then
+if [ -d "$GITHUB_REPO_NAME" ]; then
+  cd "$GITHUB_REPO_NAME"
+  docker-compose down
+  git fetch
+else
   git clone "$GITHUB_REPO_URL"
   cd "$GITHUB_REPO_NAME"
-else
-  cd "$GITHUB_REPO_NAME"
-  git fetch
-  git checkout $GITHUB_SHA
 fi
 
-docker-compose down
+git checkout --force $GITHUB_SHA
+
+if [ -f "$ENV_FILE_PATH" ]; then
+  echo "$ENV_FILE_CONTENT" > "$ENV_FILE_PATH"
+fi
 
 docker-compose \
   $DOCKER_COMPOSE_PROFILE \

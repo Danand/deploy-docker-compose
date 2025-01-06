@@ -20,6 +20,16 @@ inputs:
     required: false
     default: ''
 
+  docker-compose-env-file-path:
+    description: 'Docker Compose .env File Path'
+    required: false
+    default: ''
+
+  docker-compose-env-file-content:
+    description: 'Docker Compose .env File Content'
+    required: false
+    default: ''
+
 runs:
   using: 'composite'
   steps:
@@ -46,4 +56,6 @@ runs:
           "${{ inputs.ssh-host }}" \
           "${{ github.server_url}}" \
           "${{ github.repository }}" \
-          "${{ inputs.docker-compose-profile }}"
+          "${{ inputs.docker-compose-profile }}" \
+          "${{ inputs.docker-compose-env-file-path }}" \
+          "${{ inputs.docker-compose-env-file-content }}"
