@@ -31,6 +31,8 @@ runs:
       run: |
         mkdir -p ~/.ssh
         echo "${{ inputs.ssh-private-key }}" > ~/.ssh/id_rsa
+        echo "Host *" > ~/.ssh/config
+        echo "    StrictHostKeyChecking no" >> ~/.ssh/config
 
     - name: Deploy Docker Compose
       shell: bash
